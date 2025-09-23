@@ -1,0 +1,66 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Django Dev Server",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "cwd": "${workspaceFolder}",
+      "args": ["runserver", "0.0.0.0:8001"],
+      "django": true,
+      "justMyCode": true,
+      "env": {
+        "DEBUG": "1"
+      }
+    },
+    {
+      "name": "Django Production (Gunicorn)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "gunicorn",
+      "cwd": "${workspaceFolder}",
+      "args": [
+        "core.wsgi:application",
+        "--bind", "0.0.0.0:8000",
+        "--workers", "1",
+        "--access-logfile", "-",
+        "--error-logfile", "-"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      },
+      "justMyCode": true
+    },
+    {
+      "name": "Django Shell",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "cwd": "${workspaceFolder}",
+      "args": ["shell"],
+      "django": true,
+      "justMyCode": true,
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Django Tests",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/manage.py",
+      "cwd": "${workspaceFolder}",
+      "args": ["test"],
+      "django": true,
+      "justMyCode": true
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Dev + Production Servers",
+      "configurations": [
+        "Django Dev Server",
+        "Django Production (Gunicorn)"
+      ]
+    }
+  ]
+}

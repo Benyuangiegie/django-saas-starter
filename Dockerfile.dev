@@ -1,0 +1,23 @@
+FROM python:3.13-slim
+
+# Install system dependencies and update all packages
+RUN apt-get update && \
+    apt-get upgrade -y && \
+    apt-get install -y \
+    bash \
+    build-essential libpq-dev curl netcat-openbsd git \
+    postgresql-client && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Create a non-root user
+RUN useradd -ms /bin/bash vscode
+USER vscode
+WORKDIR /workspace
+
+# Setup bash history persistence
+RUN touch /home/vscode/.bash_history && \
+    echo 'export HISTFILE=~/.bash_history' >> /home/vscode/.bashrc && \
+    echo 'export PROMPT_COMMAND="history -a; history -n"' >> /home/vscode/.bashrc && \
+    echo 'HISTSIZE=1000' >> /home/vscode/.bashrc && \
+    echo 'HISTFILESIZE=2000' >> /home/vscode/.bashrc

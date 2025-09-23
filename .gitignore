@@ -1,0 +1,55 @@
+# Ignore Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.so
+
+# Ignore SQLite and database files
+*.sqlite3
+*.db
+
+# Ignore logs and coverage
+*.log
+*.coverage
+.coverage.*
+htmlcov/
+.pytest_cache/
+
+# Ignore environment files
+.env
+.env.*
+!.env.example
+
+# Ignore editor and IDE files
+.vscode/settings.json
+.vscode/tasks.json
+.idea/
+*.iml
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# Ignore build artifacts
+dist/
+build/
+.eggs/
+*.egg-info/
+*.egg
+*.tar.gz
+*.tgz
+
+# Ignore node_modules if present
+node_modules/
+
+# Ignore Django static files in production
+staticfiles/
+media/
+
+# Ignore OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

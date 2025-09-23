@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: django_app_db
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: devdb
+      POSTGRES_USER: devuser
+      POSTGRES_PASSWORD: devpasS@1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    container_name: django_app_web
+    build:
+      context: .
+      dockerfile: ../Dockerfile.dev
+    volumes:
+      - ..:/workspace:cached
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    command: sleep infinity
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1
+      - DATABASE_URL=postgresql://devuser:devpasS@1234@db:5432/devdb
+
+volumes:
+  pgdata:

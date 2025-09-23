@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .endpoint { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .method { padding: 4px 8px; border-radius: 3px; color: white; font-weight: bold; }
+        .get { background: #28a745; }
+        .post { background: #007bff; }
+        .put { background: #ffc107; color: black; }
+        .delete { background: #dc3545; }
+        code { background: #e9ecef; padding: 2px 4px; border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Django REST API Test Page</h1>
+        <p>Welcome to your Django REST Framework API! Below are the available endpoints:</p>
+        
+        <div class="endpoint">
+            <h3><span class="method get">GET</span> /api/docs/</h3>
+            <p>Swagger UI documentation for all API endpoints</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method get">GET</span> /api/schema/</h3>
+            <p>OpenAPI schema in JSON format</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method post">POST</span> /api/v1/auth/users/</h3>
+            <p>Create a new user account</p>
+            <code>
+                {
+                    "email": "user@example.com",
+                    "password": "yourpassword",
+                    "password_confirm": "yourpassword",
+                    "first_name": "John",
+                    "last_name": "Doe"
+                }
+            </code>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method post">POST</span> /api/v1/auth/login/</h3>
+            <p>Login and get access tokens</p>
+            <code>
+                {
+                    "email": "user@example.com",
+                    "password": "yourpassword"
+                }
+            </code>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method get">GET</span> /api/v1/auth/users/me/</h3>
+            <p>Get current user profile (requires authentication)</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method get">GET</span> /api/v1/tenants/</h3>
+            <p>List all tenants (requires authentication)</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method post">POST</span> /api/v1/tenants/</h3>
+            <p>Create a new tenant (admin only)</p>
+            <code>
+                {
+                    "name": "Acme Corporation",
+                    "slug": "acme-corp",
+                    "contact_email": "admin@acme.com",
+                    "max_users": 50
+                }
+            </code>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method get">GET</span> /api/v1/tenants/{id}/</h3>
+            <p>Get tenant details</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method post">POST</span> /api/v1/tenants/{id}/activate/</h3>
+            <p>Activate a tenant (admin only)</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method get">GET</span> /api/v1/tenants/{id}/stats/</h3>
+            <p>Get tenant statistics</p>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method post">POST</span> /api/v1/auth/token/refresh/</h3>
+            <p>Refresh access token</p>
+            <code>
+                {
+                    "refresh": "your_refresh_token"
+                }
+            </code>
+        </div>
+
+        <div class="endpoint">
+            <h3><span class="method post">POST</span> /api/v1/auth/logout/</h3>
+            <p>Logout and blacklist refresh token</p>
+            <code>
+                {
+                    "refresh": "your_refresh_token"
+                }
+            </code>
+        </div>
+
+        <h2>Quick Start</h2>
+        <ol>
+            <li>Create a user account using <code>POST /api/v1/auth/users/</code></li>
+            <li>Login using <code>POST /api/v1/auth/login/</code> to get access tokens</li>
+            <li>Include the access token in the Authorization header: <code>Bearer &lt;access_token&gt;</code></li>
+            <li>Access protected endpoints like <code>GET /api/v1/auth/users/me/</code></li>
+            <li>Visit <a href="/api/docs/">/api/docs/</a> for interactive API documentation</li>
+        </ol>
+    </div>
+</body>
+</html>
