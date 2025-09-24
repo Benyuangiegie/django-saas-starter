@@ -7,8 +7,10 @@ help:  ## Display this help message
 dev:  ## Start development server in dev container
 	python manage.py runserver 0.0.0.0:8001
 
-migrate:  ## Run database migrations
+makemigrations:  ## Create new migrations (run manually when models change)
 	python manage.py makemigrations
+
+migrate:  ## Run database migrations
 	python manage.py migrate
 
 shell:  ## Open Django shell
