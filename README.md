@@ -31,66 +31,131 @@ cp .env.example .env
 1. Open this folder in VS Code
 2. When prompted, click "Reopen in Container" 
 3. Or use Command Palette: `Dev Containers: Reopen in Container`
+4. The devcontainer will automatically:
+   - Wait for PostgreSQL to be ready
+   - Install Python dependencies
+   - Apply existing migrations
 
-### 3. Run Migrations and Create Superuser
+### 3. Create Superuser and Start Development
 ```bash
-cd /workspace
-python manage.py migrate
-python manage.py createsuperuser
+# Create superuser
+make superuser
+
+# Start development server
+make dev
 ```
 
-### 4. Start Development
-- Use **Run and Debug** panel in VS Code
-- Select "Local Dev Server" and press F5
-- Access at: http://localhost:8501
-- Admin: http://localhost:8501/admin
-- API Documentation: http://localhost:8501/api/schema/swagger-ui/
+### 4. Access Your Application
+- **Development Server**: http://localhost:8001
+- **Admin Panel**: http://localhost:8001/admin
+- **API Documentation**: http://localhost:8001/api/schema/swagger-ui/
+- **API Test Page**: http://localhost:8001/
 
 ## 📁 Project Structure
 
 ```
 ├── .devcontainer/          # VS Code Dev Container configuration
+│   ├── devcontainer.json   # Dev container settings
+│   ├── docker-compose.yml  # Development database setup
+│   ├── wait-for-postgres.sh # Database readiness script
+│   └── setup.sh            # Automated environment setup
 ├── .vscode/               # VS Code launch configurations
 ├── core/                  # Django project settings
 ├── apps/
 │   ├── accounts/          # Custom user authentication
+│   │   └── migrations/    # Database migrations (committed)
 │   ├── tenants/           # Multi-tenant support
+│   │   └── migrations/    # Database migrations (committed)
 │   └── common/            # Shared models and utilities
 ├── templates/             # HTML templates
 ├── Dockerfile             # Production Docker image
 ├── Dockerfile.dev         # Development Docker image
 ├── docker-compose.prod.yml # Production compose
 ├── entrypoint.prod.sh     # Production startup script
-├── Makefile              # Development commands
+├── Makefile              # Development commands and shortcuts
 └── requirements.txt       # Python dependencies
 ```
 
 ## 🔧 Development
 
-### Running Multiple Servers
-The VS Code configuration supports running both:
-- **Dev Server** (port 8001 → localhost:8501) 
-- **Gunicorn** (port 8000 → localhost:8500)
+### Available Make Commands
+```bash
+make help              # Show all available commands
+make dev               # Start development server
+make makemigrations    # Create new migrations (when models change)
+make migrate           # Apply existing migrations
+make shell             # Open Django shell
+make test              # Run tests
+make superuser         # Create superuser
+make lint              # Run code linting
+make format            # Format code with black and isort
+```
 
-Use the "Run Dev and Gunicorn" compound configuration.
+### Migration Workflow
+**Important**: Migration files are committed to the repository. Only create new migrations when you modify models.
+
+```bash
+# When you modify models (manual step):
+make makemigrations
+
+# To apply existing migrations (automated in devcontainer):
+make migrate
+
+# Check migration status:
+python manage.py showmigrations
+```
 
 ### Database Management
 ```bash
 # Reset database (development only)
 python manage.py flush
 
-# Create new migrations
-python manage.py makemigrations
-
-# Apply migrations
-python manage.py migrate
+# Create and apply migrations
+make makemigrations
+make migrate
 ```
 
-## 🚀 Production Deployment
+## � DevContainer Features
 
-### Build Production Image
+### Automatic Setup
+The devcontainer includes robust setup that:
+- ✅ **Waits for PostgreSQL** to be ready before running Django commands
+- ✅ **Installs dependencies** automatically
+- ✅ **Applies migrations** from committed migration files
+- ✅ **Handles timing issues** with database connectivity
+
+### Setup Scripts
+- **`wait-for-postgres.sh`**: Ensures database is ready before running commands
+- **`setup.sh`**: Handles dependency installation and migrations
+- **Clean workflow**: No migration generation in containers - only applies existing migrations
+
+### VS Code Integration
+- Pre-configured extensions for Python development
+- Django-specific settings and formatters
+- Integrated debugging support
+
+## �🚀 Production Deployment
+
+### Docker Commands
 ```bash
+# Development
+make build-dev         # Build development image
+
+# Production
+make build-prod        # Build production image
+make prod-up           # Start production environment
+make prod-down         # Stop production environment
+make prod-logs         # View production logs
+make clean             # Clean up Docker resources
+```
+
+### Manual Docker Build
+```bash
+# Production image
 docker build -t your-app:latest -f Dockerfile .
+
+# Development image
+docker build -t your-app-dev:latest -f Dockerfile.dev .
 ```
 
 ### Environment Variables Required
@@ -106,10 +171,7 @@ DB_PORT=5432
 DJANGO_SECRET_KEY=your_very_secure_secret_key
 DJANGO_DEBUG=False
 DJANGO_ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
-DJANGO_CSRF_TRUSTED_ORIGINS=https://yourdomain.com,https://www.yourdomain.com
 
-# CORS (for frontend integration)
-DJANGO_CORS_ALLOWED_ORIGINS=https://app.yourdomain.com,https://admin.yourdomain.com
 ```
 
 ### Production Features
